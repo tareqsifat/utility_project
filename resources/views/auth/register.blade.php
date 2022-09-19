@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+            <div class="card mb-5">
+                <div class="card-header">{{ __('Register as a Client') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -69,6 +69,13 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">{{ __('Register as a Technician') }}</div>
+
+                <div class="card-body">
+                    <p>Or if you want to register as Technician Register <a href="{{ route('technician.create') }}" class="text-dark"><u> here</u></a></p>
                 </div>
             </div>
         </div>

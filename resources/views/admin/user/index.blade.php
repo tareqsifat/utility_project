@@ -20,8 +20,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">first name</th>
-                                            <th scope="col">last name</th>
+                                            <th scope="col">Name</th>
                                             <th scope="col">username</th>
                                             <th scope="col">email</th>
                                             <th scope="col">role name</th>
@@ -33,13 +32,11 @@
                                         @foreach ($collection as $item)
                                             <tr>
                                                 <th scope="row">1</th>
-                                                <td>{{ $item->first_name }}</td>
-                                                <td>{{ $item->last_name }}</td>
+                                                <td>{{ $item->name }}</td>
                                                 <td>{{ $item->username }}</td>
                                                 <td>{{ $item->email }}</td>
-                                                {{-- <td>{{ $item->role_id }}</td> --}}
                                                 <td>{{ $item->role_information ? $item->role_information->name : $item->id }}</td>
-                                                <td>{{ $item->created_at->format('d M Y h:i:s a') }}</td>
+                                                <td>{{ $item->created_at ? $item->created_at->format('d M Y h:i:s a') : "" }}</td>
                                                 <td>
                                                     <div>
                                                         <a type="button" href="{{ route('admin_user_view', $item->id) }}"

@@ -52,8 +52,26 @@ function(){
 
 Route::group([
     'namespace'=>'system',
-    'middleware'=>['auth']
+    'prefix' => 'system'
 ],function(){
+    Route::get('technician/create', 'TechnicianController@create')->name('technician.create');
+    Route::post('technician', 'TechnicianController@store')->name('technician.store');
+});
 
+
+Route::group([
+    'namespace'=>'system',
+    'middleware'=>['auth'],
+    'prefix' => 'system'
+],function(){
+    Route::resource('service', 'ServiceController');
+    Route::resource('coupon', 'CouponController');
+
+    Route::resource('technician', 'TechnicianController')->except(['create', 'store']);
+    Route::put('{id}/active-technician', 'TechnicianController@activate')->name('technician.activate');
+    Route::put('{id}/unblock-technician', 'TechnicianController@unblock')->name('technician.unblock');
+    Route::put('{id}/block-technician', 'TechnicianController@block')->name('technician.block');
+    Route::get('block-technician-list', 'TechnicianController@block_list')->name('technician.blocklist');
+    Route::get('waiting-technician-list', 'TechnicianController@waiting_list')->name('technician.waitinglist');
 });
 

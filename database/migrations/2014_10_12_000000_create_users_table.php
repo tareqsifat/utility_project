@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->integer('role_id')->nullable();
-            $table->integer('is_active')->nullable();
+            $table->integer('is_active')->default(0);
             $table->string('name',100)-> nullable();
             $table->string('username',100)-> nullable();
             $table->string('photo',100)->nullable();
@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('rating')->nullable();
-            $table->string('is_blocked')->nullable();
+            $table->string('is_blocked')->default(0);
 
             $table->string('creator',100)->nullable();
             $table->string('slug',100)->nullable();

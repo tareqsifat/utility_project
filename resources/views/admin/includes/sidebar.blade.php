@@ -10,20 +10,22 @@
             </li>
         </ul>
     </li>
-    <li>
-        <a class="has-arrow" href="javascript:void();">
-            <div class="parent-icon"><i class="zmdi zmdi-view-dashboard"></i></div>
-            <div class="menu-title">Customer</div> 
-        </a>
-        <ul class="">
-            <li>
-                <a href="{{ route('report.index') }}"><i class="zmdi zmdi-dot-circle-alt"></i>customer Index</a>
-            </li>
-            <li>
-                <a href="{{ route('skill_man.index') }}"><i class="zmdi zmdi-dot-circle-alt"></i>add customer</a>
-            </li>
-        </ul>
-    </li>
+    @if (Auth::check() && Auth::user()->role_id==1)
+        <li>
+            <a class="has-arrow" href="javascript:void();">
+                <div class="parent-icon"><i class="zmdi zmdi-view-dashboard"></i></div>
+                <div class="menu-title">Customer</div> 
+            </a>
+            <ul class="">
+                <li>
+                    <a href=""><i class="zmdi zmdi-dot-circle-alt"></i>customer Index</a>
+                </li>
+                <li>
+                    <a href=""><i class="zmdi zmdi-dot-circle-alt"></i>add customer</a>
+                </li>
+            </ul>
+        </li>
+    @endif
     <li>
         <a class="has-arrow" href="javascript:void();">
             <div class="parent-icon"><i class="zmdi zmdi-view-dashboard"></i></div>
@@ -31,41 +33,49 @@
         </a>
         <ul class="">
             <li>
-                <a href="{{url('/')}}"><i class="zmdi zmdi-dot-circle-alt"></i>service Index</a>
+                <a href="{{ route('service.index') }}"><i class="zmdi zmdi-dot-circle-alt"></i>service Index</a>
             </li>
             <li>
-                <a href="{{url('/')}}"><i class="zmdi zmdi-dot-circle-alt"></i>add service</a>
+                <a href="{{ route('service.store') }}"><i class="zmdi zmdi-dot-circle-alt"></i>add service</a>
             </li>
         </ul>
     </li>
-    <li>
-        <a class="has-arrow" href="javascript:void();">
-            <div class="parent-icon"><i class="zmdi zmdi-view-dashboard"></i></div>
-            <div class="menu-title">Technician</div> 
-        </a>
-        <ul class="">
-            <li>
-                <a href="{{url('/')}}"><i class="zmdi zmdi-dot-circle-alt"></i>Technician Index</a>
-            </li>
-            <li>
-                <a href="{{url('/')}}"><i class="zmdi zmdi-dot-circle-alt"></i>add Technician</a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a class="has-arrow" href="javascript:void();">
-            <div class="parent-icon"><i class="zmdi zmdi-view-dashboard"></i></div>
-            <div class="menu-title">Promo code</div> 
-        </a>
-        <ul class="">
-            <li>
-                <a href="{{url('/')}}"><i class="zmdi zmdi-dot-circle-alt"></i>Promo code index</a>
-            </li>
-            <li>
-                <a href="{{url('/')}}"><i class="zmdi zmdi-dot-circle-alt"></i>Add Promo code</a>
-            </li>
-        </ul>
-    </li>
+    @if (Auth::check() && Auth::user()->role_id==1)
+        <li>
+            <a class="has-arrow" href="javascript:void();">
+                <div class="parent-icon"><i class="zmdi zmdi-view-dashboard"></i></div>
+                <div class="menu-title">Technician</div> 
+            </a>
+            <ul class="">
+                <li>
+                    <a href="{{ route('technician.waitinglist') }}"><i class="zmdi zmdi-dot-circle-alt"></i>Waiiting Technician</a>
+                </li>
+                <li>
+                    <a href="{{ route('technician.index') }}"><i class="zmdi zmdi-dot-circle-alt"></i>Technician Index</a>
+                </li>
+                <li>
+                    <a href="{{ route('technician.blocklist') }}"><i class="zmdi zmdi-dot-circle-alt"></i>blocked Technician</a>
+                </li>
+                <li>
+                    <a href="{{url('/')}}"><i class="zmdi zmdi-dot-circle-alt"></i>add Technician</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a class="has-arrow" href="javascript:void();">
+                <div class="parent-icon"><i class="zmdi zmdi-view-dashboard"></i></div>
+                <div class="menu-title">Promo code</div> 
+            </a>
+            <ul class="">
+                <li>
+                    <a href="{{url('/')}}"><i class="zmdi zmdi-dot-circle-alt"></i>Promo code index</a>
+                </li>
+                <li>
+                    <a href="{{url('/')}}"><i class="zmdi zmdi-dot-circle-alt"></i>Add Promo code</a>
+                </li>
+            </ul>
+        </li>
+    @endif
     @if (Auth::check() && Auth::user()->role_id==2) 
         <li>
             <a class="has-arrow" href="javascript:void();">

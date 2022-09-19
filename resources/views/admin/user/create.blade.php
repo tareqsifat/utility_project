@@ -17,19 +17,10 @@
                                 <form method="POST" action="{{ route('admin_user_store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group row">
-                                        <label for="input-21" class="col-sm-2 col-form-label">First Name</label>
+                                        <label for="input-21" class="col-sm-2 col-form-label">Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="first_name" class="form-control" id="input-21" placeholder="First Name" />
-                                            @error('first_name')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="input-21" class="col-sm-2 col-form-label">Last Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="last_name" class="form-control" id="input-21" placeholder="Last Name" />
-                                            @error('last_name')
+                                            <input type="text" name="name" class="form-control" id="input-21" placeholder="Name" />
+                                            @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -98,8 +89,8 @@
                                     <div class="form-group row">
                                         <label for="input-21" class="col-sm-2 col-form-label">Image</label>
                                         <div class="col-sm-10">
-                                            <input type="file" name="image" class="form-control" id="input-21" />
-                                            @error('image')
+                                            <input type="file" name="photo" class="form-control" id="input-21" />
+                                            @error('photo')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror 
                                         </div>

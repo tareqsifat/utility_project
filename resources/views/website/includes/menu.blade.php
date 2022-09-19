@@ -19,7 +19,7 @@
                 <div class="col-lg-6 d-flex justify-content-end">
                     <div class="header-topbar-layout1">
                         <div class="header-top-right">
-                            <a href="#" class="header-top-btn"><i class="fas fa-bell"></i>Get A Quote</a>
+                            <a href="{{ route('login') }}" class="header-top-btn">Login / Register</a>
                         </div>
                     </div>
                 </div>

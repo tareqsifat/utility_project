@@ -292,10 +292,10 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <form class="delete_form" action="" method="POST">
-                    @method('DELETE')
+                    <input type="hidden" class="modal_method_class" name="_method" value="">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Delete Confirmation</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Confirmation Modal</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -305,7 +305,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">ok</button>
                     </div>
                 </form>
             </div>

@@ -2,11 +2,15 @@ $(function () {
     const init_delete_function = () => {
         $('.delete_btn').off().on('click', function (e) {
             let attr = $(this).data('attr');
-            $('.delete_form').attr('action', attr);
+            console.log(attr);
+            $('.delete_form').attr('action', $(this).data('attr'));
+            $('.modal_method_class').val($(this).data('method'));
         });
     };
 
     init_delete_function();
+
+    
 
     $('input').on('focus', function (e) {
         $(this).siblings('span').html('');

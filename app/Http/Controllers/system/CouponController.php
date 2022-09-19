@@ -15,8 +15,8 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $service = Coupon::all();
-        return view('admin.system.coupon.index',compact('service'));
+        $coupon = Coupon::all();
+        return view('admin.system.coupon.index',compact('coupon'));
     }
 
     /**
@@ -43,16 +43,16 @@ class CouponController extends Controller
             'service_time' => 'required',
         ]);
 
-        $service = new Coupon();
+        $coupon = new Coupon();
 
-        $service->name = $request->name;
-        $service->user_id = $request->user_id;
-        $service->service_id = $request->service_id;
-        $service->promotion_id = $request->promotion_id;
-        $service->technician_id = $request->technician_id;
-        $service->charge = $request->charge;
-        $service->service_time = $request->service_time;
-        $service->save();
+        $coupon->name = $request->name;
+        $coupon->user_id = $request->user_id;
+        $coupon->service_id = $request->service_id;
+        $coupon->promotion_id = $request->promotion_id;
+        $coupon->technician_id = $request->technician_id;
+        $coupon->charge = $request->charge;
+        $coupon->service_time = $request->service_time;
+        $coupon->save();
 
         return redirect()->route('service_index')->with("Success", "Coupon saved Successfully");
     }
@@ -65,8 +65,8 @@ class CouponController extends Controller
      */
     public function show($id)
     {
-        $service = Coupon::find($id);
-        return view('admin.system.coupon.view',compact('service'));
+        $coupon = Coupon::find($id);
+        return view('admin.system.coupon.view',compact('coupon'));
     }
 
     /**
@@ -77,8 +77,8 @@ class CouponController extends Controller
      */
     public function edit($id)
     {
-        $service = Coupon::find($id);
-        return view('admin.system.coupon.edit',compact('service'));
+        $coupon = Coupon::find($id);
+        return view('admin.system.coupon.edit',compact('coupon'));
     }
 
     /**
@@ -96,16 +96,16 @@ class CouponController extends Controller
             'service_time' => 'required',
         ]);
 
-        $service = Coupon::find($id);
+        $coupon = Coupon::find($id);
 
-        $service->name = $request->name;
-        $service->user_id = $request->user_id;
-        $service->service_id = $request->service_id;
-        $service->promotion_id = $request->promotion_id;
-        $service->technician_id = $request->technician_id;
-        $service->charge = $request->charge;
-        $service->service_time = $request->service_time;
-        $service->save();
+        $coupon->name = $request->name;
+        $coupon->user_id = $request->user_id;
+        $coupon->service_id = $request->service_id;
+        $coupon->promotion_id = $request->promotion_id;
+        $coupon->technician_id = $request->technician_id;
+        $coupon->charge = $request->charge;
+        $coupon->service_time = $request->service_time;
+        $coupon->save();
 
         return redirect()->route('service_index')->with("Success", "Coupon Updated Successfully");
     }
@@ -118,9 +118,9 @@ class CouponController extends Controller
      */
     public function destroy($id)
     {
-        $service = Coupon::find($id);
+        $coupon = Coupon::find($id);
 
-        $service->delete();
+        $coupon->delete();
         
         return redirect()->route('coupon_index')->with("Success", "Coupon deleted Successfully");
     }

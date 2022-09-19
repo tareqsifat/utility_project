@@ -44,17 +44,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[ 
-            'first_name' => ['required'],
-            'last_name' => ['required'],
+            'name' => ['required'],
             'username' => ['required'],
             'email' => ['required'],
-            'image' => ['required', 'image'],
+            'photo' => ['required', 'image'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]); 
         
         $user = new User();
-        $user -> first_name = $request -> first_name;
-        $user -> last_name = $request -> last_name;
+        $user ->name = $request ->name;
         $user -> username = $request -> username;
         $user -> role_id = $request -> role_id;
         $user -> email = $request -> email;
@@ -67,8 +65,8 @@ class UserController extends Controller
         $user -> slug =  $user->id.uniqid(10);
         $user -> save();
 
-        if($request -> hasFile('image')){
-            $user -> photo = Storage::put('uploads/user',$request->file('image'));
+        if($request -> hasFile('photo')){
+            $user -> photo = Storage::put('uploads/user',$request->file('photo'));
             $user -> save();
         }
         return redirect()-> route('admin_user_view',$user->id);
@@ -78,8 +76,7 @@ class UserController extends Controller
     {
         
         $this->validate($request,[ 
-            'first_name' => ['required'],
-            'last_name' => ['required'],
+            'name' => ['required'],
             'email' => ['required'],
         ]); 
         
@@ -124,8 +121,7 @@ class UserController extends Controller
                 return redirect()->back()->withErrors('old_password','old password wrong');
         }
 
-        $user -> first_name = $request -> first_name;
-        $user -> last_name = $request -> last_name;
+        $user -> name = $request -> name;
         $user -> role_id = $request -> role_id;
         $user -> updated_at = Carbon::now() ->toDateString();
         $user -> creator = Auth::user()->id;
