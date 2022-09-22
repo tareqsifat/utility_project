@@ -10,38 +10,84 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-heder d-flex justify-content-between">
-                                <div class="card-title">Create Category</div>
-                                <a href="{{ route('category.index') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Back</a>
+                                <div class="card-title">Create Service</div>
+                                <a href="{{ route('service.index') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Back</a>
                             </div>
                             <hr />
-                            <form method="POST" class="insert_form" action="{{ route('category.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('service.store') }}" enctype="multipart/form-data">
                                 <div class="preloader"></div>
                                 @csrf
                                 <div class="form-group row">
-                                    <label for="input-21" class="col-sm-2 col-form-label">Select Main Category</label>
+                                    <label for="input-21" class="col-sm-2 col-form-label">Photo</label>
+                                    <div class="col-sm-10">
+                                        <input type="file" name="photo" class="form-control" id="input-21"/>
+                                        @error('photo')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="input-21" class="col-sm-2 col-form-label">Select Technician</label>
                                     <div class="col-sm-10">
                                         {{-- <input type="text" name="name" class="form-control" id="input-21" placeholder="Name" /> --}}
-                                        <select name="main_category_id" class="form-control" id="">
+                                        <select name="technician_id" class="form-control" id="">
                                             <option value="">Select</option>
-                                            @foreach ($main_category as $item)
+                                            @foreach ($technician as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
-                                        <span class="text-danger main_category_id"></span>
+                                        @error('technician_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="input-21" class="col-sm-2 col-form-label">Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="name" class="form-control" id="input-21" placeholder="Name" />
-                                        <span class="text-danger name"></span>
+                                        <input type="text" name="name" class="form-control" id="input-21" value="{{ old('name') }}" placeholder="Name" />
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="input-21" class="col-sm-2 col-form-label">Icon</label>
+                                    <label for="input-21" class="col-sm-2 col-form-label">Price</label>
                                     <div class="col-sm-10">
-                                        <input type="file" name="icon" class="form-control" id="input-21"/>
-                                        <span class="text-danger icon"></span>
+                                        <input type="text" name="price" class="form-control" id="input-21" value="{{ old('price') }}" placeholder="Price" />
+                                        @error('price')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="input-21" class="col-sm-2 col-form-label">Featured</label>
+                                    <div class="col-sm-10">
+                                        {{-- <input type="text" name="name" class="form-control" id="input-21" placeholder="Name" /> --}}
+                                        <select name="featured" class="form-control" id="">
+                                            <option value="1">yes</option>
+                                            <option value="0">no</option>
+                                        </select>
+                                        @error('technician_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="input-21" class="col-sm-2 col-form-label">Service Time</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="service_time" class="form-control" id="input-21" value="{{ old('service_time') }}" placeholder="Service Time" />
+                                        @error('service_time')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="input-21" class="col-sm-2 col-form-label">Description</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="description" class="form-control" id="input-21" value="{{ old('description') }}" placeholder="Description" />
+                                        @error('description')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 

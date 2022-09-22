@@ -51,11 +51,10 @@ function(){
 });
 
 Route::group([
-    'namespace'=>'system',
     'prefix' => 'system'
 ],function(){
-    Route::get('technician/create', 'TechnicianController@create')->name('technician.create');
-    Route::post('technician', 'TechnicianController@store')->name('technician.store');
+    Route::get('technician/create', 'system\TechnicianController@create')->name('technician.create');
+    Route::post('technician', 'admin\UserController@store')->name('technician.store');
 });
 
 

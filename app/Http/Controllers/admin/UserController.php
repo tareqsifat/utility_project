@@ -50,7 +50,7 @@ class UserController extends Controller
             'photo' => ['required', 'image'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]); 
-        
+        // dd($request->all());
         $user = new User();
         $user ->name = $request ->name;
         $user -> username = $request -> username;
@@ -59,7 +59,9 @@ class UserController extends Controller
         $user -> phone = $request -> phone;
         $user -> password = Hash::make($request->password); 
         $user -> created_at = Carbon::now()->toDateString();
-        $user -> creator = Auth::user()->id;
+        if(auth::check()){
+            $user -> creator = Auth::user()->id;
+        }
         $user -> save();
 
         $user -> slug =  $user->id.uniqid(10);
@@ -69,7 +71,12 @@ class UserController extends Controller
             $user -> photo = Storage::put('uploads/user',$request->file('photo'));
             $user -> save();
         }
-        return redirect()-> route('admin_user_view',$user->id);
+        $credentials = $request->only('email', 'password');
+        if(!Auth::check()){
+            Auth::attempt($credentials);
+        }
+
+        return redirect()-> route('dashboard');
        }
 
     public function update(Request $request)

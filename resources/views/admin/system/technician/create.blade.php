@@ -11,37 +11,65 @@
                         <div class="card-body">
                             <div class="card-heder d-flex justify-content-between">
                                 <div class="card-title">Create Category</div>
-                                <a href="{{ route('category.index') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Back</a>
+                                <a href="{{ route('technician.index') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Back</a>
                             </div>
                             <hr />
-                            <form method="POST" class="insert_form" action="{{ route('category.store') }}" enctype="multipart/form-data">
+                            <form method="POST"  action="{{ route('technician.store') }}" enctype="multipart/form-data">
                                 <div class="preloader"></div>
                                 @csrf
                                 <div class="form-group row">
-                                    <label for="input-21" class="col-sm-2 col-form-label">Select Main Category</label>
+                                    <label for="input-21" class="col-sm-2 col-form-label">Photo</label>
                                     <div class="col-sm-10">
-                                        {{-- <input type="text" name="name" class="form-control" id="input-21" placeholder="Name" /> --}}
-                                        <select name="main_category_id" class="form-control" id="">
-                                            <option value="">Select</option>
-                                            @foreach ($main_category as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <span class="text-danger main_category_id"></span>
+                                        <input type="file" name="photo" class="form-control" id="input-21" placeholder="Photo" />
+                                        @error('photo')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="input-21" class="col-sm-2 col-form-label">Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="name" class="form-control" id="input-21" placeholder="Name" />
-                                        <span class="text-danger name"></span>
+                                        <input type="text" name="name" class="form-control" id="input-21" placeholder="Name" value="{{ old('name') }}"/>
+                                        @error('name')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <input type="hidden" name="role_id" value="2">
+                                <div class="form-group row">
+                                    <label for="input-21" class="col-sm-2 col-form-label">User Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="username" class="form-control" id="input-21" placeholder="User Name" value="{{ old('username') }}"/>
+                                        @error('username')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <label for="input-21" class="col-sm-2 col-form-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" name="email" class="form-control" id="input-21" placeholder="Email" value="{{ old('email') }}"/>
+                                        @error('email')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="input-21" class="col-sm-2 col-form-label">Icon</label>
+                                    <label for="input-21" class="col-sm-2 col-form-label">Password</label>
                                     <div class="col-sm-10">
-                                        <input type="file" name="icon" class="form-control" id="input-21"/>
-                                        <span class="text-danger icon"></span>
+                                        <input type="password" name="password" class="form-control" id="input-21" placeholder="Password" />
+                                        @error('password')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <label for="input-21" class="col-sm-2 col-form-label">Password Confirmation</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" name="password_confirmation" class="form-control" id="input-21" placeholder="Confirm Password" />
+
                                     </div>
                                 </div>
 
@@ -49,7 +77,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label"></label>
                                     <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-white px-5"><i class="icon-lock"></i> ADD</button>
+                                        <button type="submit" class="btn btn-white px-5"><i class="icon-lock"></i>Register</button>
                                     </div>
                                 </div>
                             </form>

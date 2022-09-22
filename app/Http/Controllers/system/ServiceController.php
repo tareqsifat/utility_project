@@ -4,6 +4,7 @@ namespace App\Http\Controllers\system;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -15,8 +16,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $service = Service::all();
-        return view('admin.system.service.index',compact('service'));
+        $collection = Service::all();
+        return view('admin.system.service.index',compact('collection'));
     }
 
     /**
@@ -26,7 +27,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('admin.system.service.create');
+        $technician = User::where('role_id',2)->get();
+        return view('admin.system.service.create', compact('technician'));
     }
 
     /**
@@ -39,22 +41,23 @@ class ServiceController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'charge' => 'required',
+            'price' => 'required',
             'service_time' => 'required',
         ]);
 
         $service = new Service();
 
+        $service->photo = $request->photo;
         $service->name = $request->name;
-        $service->user_id = $request->user_id;
         $service->service_id = $request->service_id;
         $service->promotion_id = $request->promotion_id;
         $service->technician_id = $request->technician_id;
-        $service->charge = $request->charge;
+        $service->price = $request->price;
         $service->service_time = $request->service_time;
+        $service->description = $request->description;
         $service->save();
 
-        return redirect()->route('service_index')->with("Success", "service saved Successfully");
+        return redirect()->route('service.index')->with("Success", "service saved Successfully");
     }
 
     /**
@@ -78,7 +81,8 @@ class ServiceController extends Controller
     public function edit($id)
     {
         $service = Service::find($id);
-        return view('admin.system.service.edit',compact('service'));
+        $technician = User::where('role_id',2)->get();
+        return view('admin.system.service.edit',compact('service','technician'));
     }
 
     /**

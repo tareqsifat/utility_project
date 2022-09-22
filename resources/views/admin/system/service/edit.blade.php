@@ -10,45 +10,93 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-heder d-flex justify-content-between">
-                                <div class="card-title">Edit Category</div>
-                                <a href="{{ route('category.index') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Back</a>
+                                <div class="card-title">Edit Service</div>
+                                <a href="{{ route('service.index') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Back</a>
                             </div>
                             <hr />
-                            <form method="POST" class="update_form" action="{{ route('category.update',$category->id) }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('service.update', $service->id) }}" enctype="multipart/form-data">
                                 <div class="preloader"></div>
-                                @method('PUT')
                                 @csrf
                                 <div class="form-group row">
-                                    <label for="input-21" class="col-sm-2 col-form-label">Select Main Category</label>
+                                    <label for="input-21" class="col-sm-2 col-form-label">Photo</label>
+                                    <div class="col-sm-10">
+                                        <img src="{{ $service->photo }}" alt="" width="50px">
+                                        <input type="file" name="photo" class="form-control" id="input-21"/>
+                                        @error('photo')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="input-21" class="col-sm-2 col-form-label">Select Technician</label>
                                     <div class="col-sm-10">
                                         {{-- <input type="text" name="name" class="form-control" id="input-21" placeholder="Name" /> --}}
-                                        <select name="main_category_id" class="form-control" id="">
+                                        <select name="technician_id" class="form-control" id="">
                                             <option value="">Select</option>
-                                            @foreach ($main_category as $item)
-                                                <option {{ $category->main_category_id == $item->id ? 'selected' :''}} value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @foreach ($technician as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
-                                        <span class="text-danger category_id"></span>
+                                        @error('technician_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="input-21" class="col-sm-2 col-form-label">Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="name" class="form-control" id="input-21" value="{{ $category->name }}"/>
+                                        <input type="text" name="name" class="form-control" id="input-21" value="{{ old('name') }}" placeholder="Name" />
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="input-21" class="col-sm-2 col-form-label">Icon</label>
+                                    <label for="input-21" class="col-sm-2 col-form-label">Price</label>
                                     <div class="col-sm-10">
-                                        <input type="file" name="icon" class="form-control" id="input-21"/>
-                                        <img src="/{{ $category->logo }}" style="height: 40px" alt="">
-                                        <span class="text-danger icon"></span>
+                                        <input type="text" name="price" class="form-control" id="input-21" value="{{ old('price') }}" placeholder="Price" />
+                                        @error('price')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="input-21" class="col-sm-2 col-form-label">Featured</label>
+                                    <div class="col-sm-10">
+                                        {{-- <input type="text" name="name" class="form-control" id="input-21" placeholder="Name" /> --}}
+                                        <select name="featured" class="form-control" id="">
+                                            <option value="1">yes</option>
+                                            <option value="0">no</option>
+                                        </select>
+                                        @error('technician_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="input-21" class="col-sm-2 col-form-label">Service Time</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="service_time" class="form-control" id="input-21" value="{{ old('service_time') }}" placeholder="Service Time" />
+                                        @error('service_time')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="input-21" class="col-sm-2 col-form-label">Description</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="description" class="form-control" id="input-21" value="{{ old('description') }}" placeholder="Description" />
+                                        @error('description')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label"></label>
                                     <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-white px-5"><i class="icon-lock"></i> Update</button>
+                                        <button type="submit" class="btn btn-white px-5"><i class="icon-lock"></i> ADD</button>
                                     </div>
                                 </div>
                             </form>
