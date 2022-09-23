@@ -20,6 +20,7 @@ Route::group([
     Route::get('/', 'WebsiteController@index')->name('website_index');
     Route::get('/about', 'WebsiteController@about')->name('website_about');
     Route::get('/service', 'WebsiteController@service')->name('website_services');
+    Route::get('/service_details/{id}', 'WebsiteController@service_details')->name('service_details');
     Route::get('/contact', 'WebsiteController@contact')->name('website_contact');
     
 });
@@ -65,6 +66,11 @@ Route::group([
 ],function(){
     Route::resource('service', 'ServiceController');
     Route::resource('coupon', 'CouponController');
+
+    Route::post('make_order', 'OrderController@store')->name('order_store');
+    Route::post('accept_request/{id}', 'OrderController@service_done')->name('accept_order');
+    Route::post('service_done/{id}', 'OrderController@service_done')->name('service_done');
+    Route::post('get_paid/{id}', 'OrderController@service_done')->name('get_paid');
 
     Route::resource('technician', 'TechnicianController')->except(['create', 'store']);
     Route::put('{id}/active-technician', 'TechnicianController@activate')->name('technician.activate');

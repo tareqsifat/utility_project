@@ -46,7 +46,11 @@ class User extends Authenticatable
 
     public function role_information()
     {
-        //function_body
         return $this->belongsTo('App\Models\UserRole','role_id','id');
+    }
+
+    public function order()
+    {
+        return $this->hasMany(Service::class, 'user_id', 'id');
     }
 }

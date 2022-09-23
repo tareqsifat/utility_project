@@ -26,20 +26,22 @@
             </ul>
         </li>
     @endif
-    <li>
-        <a class="has-arrow" href="javascript:void();">
-            <div class="parent-icon"><i class="zmdi zmdi-view-dashboard"></i></div>
-            <div class="menu-title">service</div> 
-        </a>
-        <ul class="">
-            <li>
-                <a href="{{ route('service.index') }}"><i class="zmdi zmdi-dot-circle-alt"></i>service Index</a>
-            </li>
-            <li>
-                <a href="{{ route('service.store') }}"><i class="zmdi zmdi-dot-circle-alt"></i>add service</a>
-            </li>
-        </ul>
+    @auth()
+        <li>
+            <a class="has-arrow" href="javascript:void();">
+                <div class="parent-icon"><i class="zmdi zmdi-view-dashboard"></i></div>
+                <div class="menu-title">service</div> 
+            </a>
+            <ul class="">
+                <li>
+                    <a href="{{ route('service.index') }}"><i class="zmdi zmdi-dot-circle-alt"></i>service Index</a>
+                </li>
+                <li>
+                    <a href="{{ route('service.create') }}"><i class="zmdi zmdi-dot-circle-alt"></i>add service</a>
+                </li>
+            </ul>
     </li>
+    @endauth
     @if (Auth::check() && Auth::user()->role_id==1)
         <li>
             <a class="has-arrow" href="javascript:void();">
