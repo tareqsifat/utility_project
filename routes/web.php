@@ -66,11 +66,15 @@ Route::group([
 ],function(){
     Route::resource('service', 'ServiceController');
     Route::resource('coupon', 'CouponController');
+    Route::put('apply/{order_id}/coupon', 'CouponController@apply_coupon')->name('apply_coupon');
 
+    Route::get('active_order_list', 'OrderController@index')->name('active_order_list');
     Route::post('make_order', 'OrderController@store')->name('order_store');
-    Route::post('accept_request/{id}', 'OrderController@service_done')->name('accept_order');
-    Route::post('service_done/{id}', 'OrderController@service_done')->name('service_done');
-    Route::post('get_paid/{id}', 'OrderController@service_done')->name('get_paid');
+    Route::put('accept_request/{id}', 'OrderController@accept_request')->name('accept_request');
+    Route::put('service_done/{id}', 'OrderController@service_done')->name('service_done');
+    Route::put('pay_to_service_man/{id}', 'OrderController@pay_to_service_man')->name('pay_to_service_man');
+    Route::get('payment_page/{id}', 'OrderController@payment_page')->name('payment_page');
+    Route::put('get_paid/{id}', 'OrderController@get_paid')->name('get_paid');
 
     Route::resource('technician', 'TechnicianController')->except(['create', 'store']);
     Route::put('{id}/active-technician', 'TechnicianController@activate')->name('technician.activate');

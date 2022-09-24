@@ -4,6 +4,9 @@ namespace App\Http\Controllers\system;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
+use App\Models\Order;
+use App\Models\Service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CouponController extends Controller
@@ -39,22 +42,21 @@ class CouponController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'charge' => 'required',
-            'service_time' => 'required',
+            'discount' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
         ]);
+
 
         $coupon = new Coupon();
 
         $coupon->name = $request->name;
-        $coupon->user_id = $request->user_id;
-        $coupon->service_id = $request->service_id;
-        $coupon->promotion_id = $request->promotion_id;
-        $coupon->technician_id = $request->technician_id;
-        $coupon->charge = $request->charge;
-        $coupon->service_time = $request->service_time;
+        $coupon->discount = $request->discount;
+        $coupon->start_date = $request->start_date;
+        $coupon->end_date = $request->end_date;
         $coupon->save();
 
-        return redirect()->route('service_index')->with("Success", "Coupon saved Successfully");
+        return redirect()->route('coupon.index')->with("Success", "Coupon saved Successfully");
     }
 
     /**
@@ -92,22 +94,20 @@ class CouponController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'charge' => 'required',
-            'service_time' => 'required',
+            'discount' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
         ]);
 
         $coupon = Coupon::find($id);
 
         $coupon->name = $request->name;
-        $coupon->user_id = $request->user_id;
-        $coupon->service_id = $request->service_id;
-        $coupon->promotion_id = $request->promotion_id;
-        $coupon->technician_id = $request->technician_id;
-        $coupon->charge = $request->charge;
-        $coupon->service_time = $request->service_time;
+        $coupon->discount = $request->discount;
+        $coupon->start_date = $request->start_date;
+        $coupon->end_date = $request->end_date;
         $coupon->save();
 
-        return redirect()->route('service_index')->with("Success", "Coupon Updated Successfully");
+        return redirect()->route('coupon.index')->with("Success", "Coupon Updated Successfully");
     }
 
     /**
@@ -122,6 +122,30 @@ class CouponController extends Controller
 
         $coupon->delete();
         
-        return redirect()->route('coupon_index')->with("Success", "Coupon deleted Successfully");
+        return redirect()->route('coupon.index')->with("Success", "Coupon deleted Successfully");
+    }
+
+    public function apply_coupon(Request $request, $order_id)
+    {
+        // dd($request->all());
+        $now = Carbon::now()->format('Y') . Carbon::now()->format('m') . Carbon::now()->format('d');
+        $coupon = Coupon::where('name', $request->name)->first();
+        $order = Order::find($order_id);
+        if(isset($coupon)){
+            $coupon_price = $order->service->price;
+            $start = str_replace('-' , "", $coupon->start_date);
+            $end = str_replace('-',  "", $coupon->end_date);
+            if((int) $start <= (int) $now  && (int) $end <= (int) $now) {
+                $coupon_price = (int) $order->service->price - (((int) $order->service->price/100) * (int)$coupon->discount);
+            }
+            else {
+                return view('website.order.payment', compact('coupon_price', 'order'))->with("success","coupon is not avaolable");
+            }
+        }else {
+            return view('website.order.payment', compact('order'))->with('success','coupon not Found');
+        }
+
+
+        return view('website.order.payment', compact('coupon_price', 'order'))->with('success','coupon applied successfully');
     }
 }

@@ -36,11 +36,13 @@
                 <li>
                     <a href="{{ route('service.index') }}"><i class="zmdi zmdi-dot-circle-alt"></i>service Index</a>
                 </li>
-                <li>
-                    <a href="{{ route('service.create') }}"><i class="zmdi zmdi-dot-circle-alt"></i>add service</a>
-                </li>
+                @if (Auth::check() && Auth::user()->role_id==1)
+                    <li>
+                        <a href="{{ route('service.create') }}"><i class="zmdi zmdi-dot-circle-alt"></i>add service</a>
+                    </li>
+                @endif
             </ul>
-    </li>
+        </li>
     @endauth
     @if (Auth::check() && Auth::user()->role_id==1)
         <li>
@@ -70,26 +72,28 @@
             </a>
             <ul class="">
                 <li>
-                    <a href="{{url('/')}}"><i class="zmdi zmdi-dot-circle-alt"></i>Promo code index</a>
+                    <a href="{{route('coupon.index')}}"><i class="zmdi zmdi-dot-circle-alt"></i>Promo code index</a>
                 </li>
                 <li>
-                    <a href="{{url('/')}}"><i class="zmdi zmdi-dot-circle-alt"></i>Add Promo code</a>
+                    <a href="{{route('coupon.create')}}"><i class="zmdi zmdi-dot-circle-alt"></i>Add Promo code</a>
                 </li>
             </ul>
         </li>
     @endif
-    @if (Auth::check() && Auth::user()->role_id==2) 
+    @if (Auth::check()) 
         <li>
             <a class="has-arrow" href="javascript:void();">
                 <div class="parent-icon"><i class="zmdi zmdi-view-dashboard"></i></div>
-                <div class="menu-title">Service Request</div> 
+                <div class="menu-title">@if(Auth::user()->role_id==2 || Auth::user()->id == 1) 
+                        Service Request
+                    @elseif(Auth::user()->role_id == 3)
+                        Your Order
+                    @endif
+                </div> 
             </a>
             <ul class="">
                 <li>
-                    <a href="{{url('/')}}"><i class="zmdi zmdi-dot-circle-alt"></i>Active request</a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}"><i class="zmdi zmdi-dot-circle-alt"></i>Completed Request</a>
+                    <a href="{{ route('active_order_list') }}"><i class="zmdi zmdi-dot-circle-alt"></i>Active request</a>
                 </li>
             </ul>
         </li>

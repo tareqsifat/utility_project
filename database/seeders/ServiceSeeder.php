@@ -18,7 +18,8 @@ class ServiceSeeder extends Seeder
             'name' =>'Washroom clean',
             'service_time' => '60',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-            'featured' => '1',
+            'featured' => '0',
+            'technician_id' => '2',
             'price' => '500',
             'rating' => '5.00',
         ]);
@@ -27,6 +28,7 @@ class ServiceSeeder extends Seeder
             'service_time' => '50',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
              'featured' => '1',
+             'technician_id' => '2',
             'price' => '500',
             'rating' => '5.00',
         ]);
@@ -35,6 +37,7 @@ class ServiceSeeder extends Seeder
             'service_time' => '45',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
              'featured' => '1',
+             'technician_id' => '3',
             'price' => '700',
             'rating' => '5.00',
         ]);
@@ -42,7 +45,8 @@ class ServiceSeeder extends Seeder
             'name' =>'Electric repairing',
             'service_time' => '40',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-             'featured' => '0',
+             'featured' => '1',
+             'technician_id' => '3',
             'price' => '800',
             'rating' => '5.00',
         ]);
@@ -50,7 +54,8 @@ class ServiceSeeder extends Seeder
             'name' =>'Water tank clean',
             'service_time' => '43',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-               'featured' => '0',
+            'featured' => '0',
+            'technician_id' => '4',
               'price' => '900',
             'rating' => '4.00',
         ]);
@@ -58,7 +63,8 @@ class ServiceSeeder extends Seeder
             'name' =>'electric motor repairing',
             'service_time' => '41',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-               'featured' => '0',
+            'featured' => '0',
+            'technician_id' => '4',
             'price' => '1000',
             'rating' => '4.00',
         ]);
@@ -66,7 +72,8 @@ class ServiceSeeder extends Seeder
             'name' =>'Gas line repairing',
              'service_time' => '38',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-               'featured' => '0',
+            'featured' => '0',
+            'technician_id' => '5',
             'price' => '600',
             'rating' => '4.00',
         ]);
@@ -74,23 +81,26 @@ class ServiceSeeder extends Seeder
             'name' =>'Electric switchboard repairing',
              'service_time' => '36',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-               'featured' => '0',
+            'featured' => '0',
+            'technician_id' => '5',
             'price' => '800',
             'rating' => '5.00',
         ]);
         DB::table('services')->insert([
             'name' =>'Water supply line repairing ',
-             'service_time' => '35',
+            'service_time' => '35',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-               'featured' => '0',
+            'featured' => '0',
+            'technician_id' => '3',
             'price' => '900',
             'rating' => '5.00',
         ]);
         DB::table('services')->insert([
             'name' =>'Electric line repairing',
-             'service_time' => '32',
+            'service_time' => '32',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-               'featured' => '0',
+            'featured' => '0',
+            'technician_id' => '2',
             'price' => '700',
             'rating' => '4.00',
         ]);

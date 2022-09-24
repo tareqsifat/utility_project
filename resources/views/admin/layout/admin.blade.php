@@ -61,8 +61,9 @@
                     <h5 class="logo-text">Ecomerce</h5>
                     <div class="close-btn"><i class="zmdi zmdi-close"></i></div>
                 </div>
-
-                @include('admin.includes.sidebar')
+                @auth
+                    @include('admin.includes.sidebar')
+                @endauth
 
                 
             </div>

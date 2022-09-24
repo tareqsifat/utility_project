@@ -4,6 +4,7 @@ namespace App\Http\Controllers\system;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Facade\Ignition\Exceptions\ViewExceptionWithSolution;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,11 +18,18 @@ class OrderController extends Controller
     public function index()
     {
         if(Auth::user()->role_id == 1){
-            $order = Order::where('serve_status', '!=', 4)->get();
+            $order = Order::where('serve_status', '!=', 5)->get();
         }else if(Auth::user()->role_id == 2){
-            $order = Order::where('serve_status', '!=',4)->where('technician_id', Auth::user()->id)->get();
+            $order = Order::where('serve_status', '!=',5)->where('technician_id', Auth::user()->id)->get();
+        }else if(Auth::user()->role_id == 3){
+            $order = Order::where('serve_status', '!=',5)->where('user_id', Auth::user()->id)->get();
         }
-        return view('admin.system.order.index', compact('order'));
+        if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2){
+            return view('admin.system.order.index', compact('order'));
+        }
+        else {
+            return View('website.order.index', compact('order'));
+        }
     }
     /**
      * Store a newly created resource in storage.
@@ -42,12 +50,12 @@ class OrderController extends Controller
         $order->slug = $order->id.uniqid(10);
         $order->save();
 
-        return redirect()->back()->with('success','service booked successfully');
+        return redirect()->route('active_order_list')->with("success", "Order Created Successfully");
     }
 
     /*
-    /accept function 
-    / technician will accept the request
+    // accept function 
+    // technician will accept the request
     */
     public function accept_request($id)
     {
@@ -63,14 +71,27 @@ class OrderController extends Controller
         $order->serve_status = 3;
         $order->save();
 
-        return redirect()->back()->with('success','request Accepted successfully');
+        return redirect()->back()->with('success','Service done successfully');
     }
-    public function get_paid($id)
+    public function payment_page($id)
+    {
+        $order = Order::find($id);
+        return view('website.order.payment',compact('order'));
+    }
+    public function pay_to_service_man($id)
     {
         $order = Order::find($id);
         $order->serve_status = 4;
         $order->save();
+        
+        return redirect()->back()->with('success','paid successfully');
+    }
+    public function get_paid($id)
+    {
+        $order = Order::find($id);
+        $order->serve_status = 5;
+        $order->save();
 
-        return redirect()->back()->with('success','request Accepted successfully');
+        return redirect()->back()->with('success','Service Completed successfully');
     }
 }

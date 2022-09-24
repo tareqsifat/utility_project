@@ -34,7 +34,7 @@
                             </tr>
                             <tr>
                                 <td>Technician</td>
-                                <td>{{ $service->technician_id }}</td>
+                                <td>{{ $service->technician->name }}</td>
                             </tr>
                             <tr>
                                 <td>Description</td>
